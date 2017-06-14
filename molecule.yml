@@ -1,0 +1,32 @@
+---
+molecule:
+  test:
+    sequence:
+      - destroy
+      - syntax
+      - create
+      - converge
+      - idempotence
+      - verify
+driver:
+  name: vagrant
+vagrant:
+  platforms:
+    - name: ubuntu/trusty64
+      box: trusty64
+      box_url: https://vagrantcloud.com/ubuntu/boxes/trusty64/versions/14.04/providers/virtualbox.box
+  providers:
+    - name: virtualbox
+      type: virtualbox
+      options:
+        memory: 512
+        cpus: 2
+  instances:
+    - name: ansible-python-security
+      ansible_groups:
+        - group1
+verifier:
+  name: testinfra
+dependency:
+  name: galaxy
+  requirements_file: roles.yml

@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Taylor Nation
+  description: Ansible Role to add Python support for TLS SNI.
+  company: Azavea, inc.
+  license: Apache
+  min_ansible_version: 2.3.1
+  platforms:
+  - name: Ubuntu
+    versions:
+      - trusty
+  categories:
+  - development
+  - system
+dependencies:
+  - src: azavea.pip
+    version: 1.0.0
+    name: azavea.pip
