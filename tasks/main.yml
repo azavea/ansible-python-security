@@ -1,0 +1,6 @@
+---
+- name: Install Python TLS SNI dependencies
+  pip: name={{ item.name }}=={{ item.version }} state=present
+  with_items:
+    - { name: ndg-httpsclient, version: "{{ python_security_ndghttpsclient_version }}" }
+    - { name: pyasn1, version: "{{ python_security_pyasn1_version }}" }
