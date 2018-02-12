@@ -1,3 +1,2 @@
 ---
-python_security_ndghttpsclient_version: "0.4.*"
-python_security_pyasn1_version: "0.2.*"
+python_security_urllib3_version: "1.22.*"
