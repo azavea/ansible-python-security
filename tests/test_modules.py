@@ -1,4 +1,5 @@
 import pytest
+import re
 
 
 @pytest.fixture()
@@ -10,12 +11,8 @@ def AnsibleDefaults(Ansible):
     return Ansible("include_vars", "./defaults/main.yml")["ansible_facts"]
 
 
-@pytest.mark.parametrize("pkg_name", [
-    "pyasn1",
-    "ndg-httpsclient",
-])
-def test_modules(AnsibleDefaults, PipPackage, pkg_name):
-    """ Ensure pip modules are installed.
+def test_modules(AnsibleDefaults, PipPackage):
+    """ Ensure urllib3 is installed.
 
     Args:
         GetAnsibleDefaults - Get default version of the package
@@ -23,14 +20,12 @@ def test_modules(AnsibleDefaults, PipPackage, pkg_name):
     """
     installed_pkgs = PipPackage.get_packages()
 
-    # Get package version from Ansible variables. Naming convention is
-    # <package_name_without_hyphens>_version
-    pkg_version = AnsibleDefaults[
-        "python_security_{}_version".format(pkg_name.replace("-", ""))
-    ].split("*")[0]
+    # Get package version from Ansible variables.
+    pkg_version = re.match("\d+\.\d+",
+        AnsibleDefaults["python_security_urllib3_version"].split("*")[0]).group(0)  # NOQA E501
 
-    assert pkg_name in installed_pkgs.keys()
-    assert pkg_version in installed_pkgs[pkg_name]["version"]
+    assert 'urllib3' in installed_pkgs.keys()
+    assert pkg_version in installed_pkgs["urllib3"]["version"]
 
 
 def test_python_ssl(Ansible, File):
