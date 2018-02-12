@@ -3,8 +3,7 @@ Ansible Role to add Python support for TLS SNI.
 
 ## Role Variables
 
-- `python_security_ndghttpsclient_version`: Version of `ndg-httpsclient` to install. (Default: `"0.4.*"`)
-- `python_security_pyasn1_version`: Version of `pyasn1` to install. (Default: `"0.2.*"`)
+- `python_security_urllib3_version`: Version of `urllib3[secure]` to install. (Default: `"1.22.*"`)
 
 ## Testing
 ### Requirements
